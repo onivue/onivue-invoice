@@ -1,0 +1,3 @@
+{
+  "extends": "@onivue-invoice/config/tsconfig.base.json"
+}
