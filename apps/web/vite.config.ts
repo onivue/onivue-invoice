@@ -17,6 +17,9 @@ export default defineConfig({
     },
   },
   envDir: "../../",
+  ssr: {
+    external: ["pdfkit", "fontkit", "swissqrbill", "png-js", "linebreak"],
+  },
   plugins: [tailwindcss(), tanstackStart(), nitro(), viteReact()],
   server: {
     port: 3000,

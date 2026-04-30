@@ -1,5 +1,13 @@
 import { customers, db, invoiceItems, invoices, settings } from "@onivue-invoice/db";
 import { eq } from "drizzle-orm";
+import { fileURLToPath } from "node:url";
+
+const FONT_REGULAR_PATH = fileURLToPath(
+  new URL("../fonts/JetBrainsMono-Regular.ttf", import.meta.url),
+);
+const FONT_BOLD_PATH = fileURLToPath(
+  new URL("../fonts/JetBrainsMono-Bold.ttf", import.meta.url),
+);
 
 // design constants — adjust here for all PDFs
 const DESIGN = {
@@ -16,9 +24,8 @@ const DESIGN = {
     heading: 12,
     total: 11,
   },
-  font: "SFMono",
-  fontBold: "SFMono",
-  fontPath: "/System/Library/Fonts/SFNSMono.ttf",
+  font: "Mono",
+  fontBold: "MonoBold",
 } as const;
 
 function formatCHF(amount: number): string {
@@ -90,7 +97,8 @@ export async function generateInvoicePdf(
     doc.on("end", () => resolve(Buffer.concat(chunks)));
     doc.on("error", reject);
 
-    doc.registerFont(DESIGN.font, DESIGN.fontPath);
+    doc.registerFont(DESIGN.font, FONT_REGULAR_PATH);
+    doc.registerFont(DESIGN.fontBold, FONT_BOLD_PATH);
 
     // page 1: invoice
     doc.addPage();
