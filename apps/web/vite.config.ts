@@ -20,6 +20,18 @@ export default defineConfig({
   ssr: {
     external: ["pdfkit", "fontkit", "swissqrbill", "png-js", "linebreak"],
   },
+  build: {
+    rollupOptions: {
+      external: [
+        "pdfkit",
+        "fontkit",
+        "swissqrbill",
+        "swissqrbill/pdf",
+        "png-js",
+        "linebreak",
+      ],
+    },
+  },
   plugins: [tailwindcss(), tanstackStart(), nitro(), viteReact()],
   server: {
     port: 3000,
